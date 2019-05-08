@@ -15,7 +15,7 @@ $(document).ready(function(){
     function check_session() {
         $.ajax({
             type:"POST",
-            url: "function.php",
+            url: "php/main.php",
             contentType: "application/json",
             data: JSON.stringify({'action':'check_session'}),
             success: function(msg) {
@@ -38,7 +38,7 @@ $(document).ready(function(){
         let filter = {'action':'product_place'}
         $.ajax({
             type: "POST",
-            url: "function.php",
+            url: "php/main.php",
             contentType: "application/json",
             data: JSON.stringify(filter),
             success: function(msg) {
@@ -59,7 +59,7 @@ $(document).ready(function(){
                         </div>\
                         <div id="product-text">\
                             <div id="product-name">' + col['Name'] +'</div>\
-                            <div id="product-cost">' + col['Cost'] + '</div>\
+                            <div id="product-cost">' + col['Cost'] + ' $' + '</div>\
                             <button id="product-to-basket-btn" value="">ADD TO CART</button>\
                         </div>\
                     </div>');
@@ -73,7 +73,7 @@ $(document).ready(function(){
                 </div>\
                 <div id="product-text">\
                     <div id="product-name">' + msg['Name'] +'</div>\
-                    <div id="product-cost">' + msg['Cost'] + '</div>\
+                    <div id="product-cost">' + msg['Cost'] + '$' + '</div>\
                     <button id="product-to-basket-btn" value="">ADD TO CART</button>\
                 </div>\
             </div>');
@@ -103,7 +103,7 @@ $(document).ready(function(){
         data = JSON.stringify(data);
         $.ajax({
             type:"POST",
-            url: "function.php",
+            url: "php/main.php",
             contentType: "application/json",
             data: data,
             success: function(msg) {
@@ -137,7 +137,7 @@ $(document).ready(function(){
         event.preventDefault();
         $.ajax({
             type:"POST",
-            url: "function.php",
+            url: "php/main.php",
             contentType: "application/json",
             data: data,
             success: function(msg) {
@@ -171,7 +171,7 @@ $(document).ready(function(){
         data = JSON.stringify(data);
         $.ajax({
             type:"POST",
-            url: "function.php",
+            url: "php/main.php",
             contentType: "application/json",
             data: data,
             success: function() {
@@ -186,7 +186,7 @@ $(document).ready(function(){
 
     // $(".form-signUp-modal").ajaxForm({
     //     type:"POST",
-    //     url: "function.php",
+    //     url: "php/main.php",
     //     success: function(msg) {
     //         alert(msg);
     //         $('#signup_form_container').html(msg);

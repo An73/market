@@ -152,15 +152,15 @@ header ul {
 }
 
 #topmenu .icon-running {
-	background-image: url(./img/running_icon.png);
+	background-image: url(../resource/icon/running_icon.png);
 }
 
 #topmenu .icon-training {
-	background-image: url(./img/training_icon.png);
+	background-image: url(../resource/icon/training_icon.png);
 }
 
 #topmenu .icon-lifestyle {
-	background-image: url(./img/lifestyle_icon.png);
+	background-image: url(../resource/icon/lifestyle_icon.png);
 }
 
 li {

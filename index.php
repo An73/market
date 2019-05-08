@@ -20,7 +20,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Title</title>
-		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="css/style.css">
 
 		<script src="./js/jquery-3.4.0.js"></script>
 		<script src="./js/jquery.form.js"></script>
