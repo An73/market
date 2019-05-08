@@ -6,12 +6,14 @@ class DbHelper {
     private $db_name;
     private $pdo;
     private $table_user;
+    private $table_products;
 
     function __construct() {
         $this->db_user = "root";
-        $this->db_passwd = "";
-        $this->db_name = "rush00";
+        $this->db_passwd = "648941";
+        $this->db_name = "rush";
         $this->table_user = "users";
+        $this->table_products = "products";
         try {
             $this->pdo = new PDO("mysql:host=localhost;dbname=$this->db_name", $this->db_user, $this->db_passwd);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
@@ -52,6 +54,13 @@ class DbHelper {
                                     WHERE User_login='$User_login' AND Passwd='$Passwd';");
         return $stmt->fetch();
     }
+
+    function getProduct() {
+        $stmt = $this->pdo->query("SELECT * 
+                                    FROM $this->table_products;");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
 
     function __destruct() {
         try {

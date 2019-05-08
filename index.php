@@ -129,7 +129,7 @@
 				<div id="product-text">
 					<div id="product-name">Puma California Casual Sneakers</div>
 					<div id="product-cost">150 $</div>
-					<button id="product-to-basket" value="">In basket</button>
+					<button id="product-to-basket-btn" value="">ADD TO CART</button>
 				</div>
 			</div>
 

@@ -2,6 +2,7 @@
 
 $(document).ready(function(){
     check_session();
+    product_place();
     let modalSignUp = document.getElementById('modalSignup');
     let btnSignUp = document.getElementById('signUpBtn');
     let form_signup = document.getElementById('errors-signup');
@@ -30,7 +31,53 @@ $(document).ready(function(){
                     $("#header-user").html("Hello, " + msg['User']);
                 }
             }
-        })
+        });
+    }
+
+    function product_place() {
+        let filter = {'action':'product_place'}
+        $.ajax({
+            type: "POST",
+            url: "function.php",
+            contentType: "application/json",
+            data: JSON.stringify(filter),
+            success: function(msg) {
+                msg = JSON.parse(msg);
+                product_view(msg);
+            }
+        });
+    }
+
+    function product_view(msg) {
+        console.log(msg);
+        if (Array.isArray(msg)){
+            msg.forEach(col => {
+                $("#product-place").append(
+                    '<div id="product">\
+                        <div id="product-img">\
+                            <img src="' + col['Link_image'] +'">\
+                        </div>\
+                        <div id="product-text">\
+                            <div id="product-name">' + col['Name'] +'</div>\
+                            <div id="product-cost">' + col['Cost'] + '</div>\
+                            <button id="product-to-basket-btn" value="">ADD TO CART</button>\
+                        </div>\
+                    </div>');
+            });
+        }
+        else {
+            $("#product-place").append(
+            '<div id="product">\
+                <div id="product-img">\
+                    <img src="' + msg['Link_image'] +'">\
+                </div>\
+                <div id="product-text">\
+                    <div id="product-name">' + msg['Name'] +'</div>\
+                    <div id="product-cost">' + msg['Cost'] + '</div>\
+                    <button id="product-to-basket-btn" value="">ADD TO CART</button>\
+                </div>\
+            </div>');
+        }
     }
 
     $("#modalSignup").mouseup(function (e) {
@@ -132,6 +179,8 @@ $(document).ready(function(){
             } 
         });
     });
+
+    
 });
 
 

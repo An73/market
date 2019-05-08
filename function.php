@@ -9,41 +9,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($_SERVER["CONTENT_TYPE"] == 'application/json'){
         $data = json_decode( file_get_contents('php://input'), true);
         $errs = array();
-        if ($data['action'] == "signup") {
-            $errs = validate_form($data);
-            if (!empty($errs)) {
-                echo json_encode(array('errors' => $errs[0]));
+        switch ($data['action']) {
+            case "signup":
+                $errs = validate_form($data);
+                if (!empty($errs)) {
+                    echo json_encode(array('errors' => $errs[0]));
+                    exit;
+                }
+                $ret = $dbh->insertNewUser($data['newLogin'], $data['email'], hash('SHA256', $data['passwd1']));
+                if ($ret != 'Success') {
+                    echo json_encode(array('errors' => $ret));
+                    exit;
+                }
+                echo json_encode(array('success' => $ret));
                 exit;
-            }
-            $ret = $dbh->insertNewUser($data['newLogin'], $data['email'], hash('SHA256', $data['passwd1']));
-            if ($ret != 'Success') {
-                echo json_encode(array('errors' => $ret));
+        
+            case "signin":
+                $ret = $dbh->getUser($data['login'], hash('SHA256', $data['passwd']));
+                if ($ret) {
+                    $_SESSION['User'] = $ret['User_login'];
+                    //var_dump($_SESSION);
+                    echo "1";
+                    exit;
+                }
+                echo "0";
                 exit;
-            }
-            echo json_encode(array('success' => $ret));
-            exit;
-        }
-        else if ($data['action'] == "signin") {
-            $ret = $dbh->getUser($data['login'], hash('SHA256', $data['passwd']));
-            if ($ret) {
-                $_SESSION['User'] = $ret['User_login'];
-                //var_dump($_SESSION);
-                echo "1";
+        
+            case 'check_session':
+                if (!isset($_SESSION['User'])) {
+                    echo json_encode(array('User' => 'none'));
+                    exit;
+                }
+                echo json_encode(array('User' => $_SESSION['User']));
                 exit;
-            }
-            echo "0";
-            exit;
-        }
-        else if ($data['action'] == 'check_session') {
-            if (!isset($_SESSION['User'])) {
-                echo json_encode(array('User' => 'none'));
+
+            case 'logout':
+                unset($_SESSION['User']);
                 exit;
-            }
-            echo json_encode(array('User' => $_SESSION['User']));
-            exit;
-        }
-        else if ($data['action'] == 'logout') {
-            unset($_SESSION['User']);
+
+            case 'product_place':
+                $ret = $dbh->getProduct();
+                echo json_encode($ret);
         }
         // echo json_encode(array('foo' => 'bar'));
         //echo json_encode($errs);

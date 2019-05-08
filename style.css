@@ -490,10 +490,71 @@ input[type="checkbox"]:checked + .l_checkbox::before{
 	font-family: 'Helvetica';
 	padding-left: 3px;
 	padding-right: 3px;
-	font-size: 15px;
 	border-top: solid #a67939;
 	background-color: #ffcb30;
 }
 
+#product-name {
+	font-size: 15px;
+	color: #6e4e20;
+}
+
+#product-cost {
+	font-size: 17px;
+	color: #3e6105;
+}
+
+#product-to-basket-btn {
+	font-size: 12px;
+	font-family: 'Helvetica';
+	width: 120px;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 3px;
+	
+	border-color:#3A4C7D;
+	border-width: 0px 0px 2px 0px;
+	border-style: solid;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+
+	color: #fff3aa;
+ 	background-color: #eab92d;
+ 	background-image: -webkit-gradient(linear, left top, left bottom, from(#a67939), to(#845108));
+ 	background-image: -webkit-linear-gradient(top, #a67939, #845108);
+ 	background-image: -moz-linear-gradient(top, #a67939, #845108);
+ 	background-image: -ms-linear-gradient(top, #a67939, #845108);
+ 	background-image: -o-linear-gradient(top, #a67939, #845108);
+ 	background-image: linear-gradient(to bottom, #a67939, #845108);
+ 	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#a67939, endColorstr=#845108);
+}
+
+#product-to-basket-btn:hover{
+	border-color:#3A4C7D;
+	border-width: 0px 0px 2px 0px;
+	border-style: solid;
+	color: #c5ffaa;
+	background-color: #3e6105;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#3e6105), to(#543305));
+	background-image: -webkit-linear-gradient(top, #3e6105, #543305);
+	background-image: -moz-linear-gradient(top, #3e6105, #543305);
+	background-image: -ms-linear-gradient(top, #3e6105, #543305);
+	background-image: -o-linear-gradient(top, #3e6105, #543305);
+	background-image: linear-gradient(to bottom, #3e6105, #543305);
+	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#3e6105, endColorstr=#543305);
+}
+#product-to-basket-btn:focus {
+   	outline: none;
+   	color: #c5ffaa;
+	background-color: #3e6105;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#3e6105), to(#c5ffaa));
+	background-image: -webkit-linear-gradient(top, #3e6105, #c5ffaa);
+	background-image: -moz-linear-gradient(top, #3e6105, #c5ffaa);
+	background-image: -ms-linear-gradient(top, #3e6105, #c5ffaa);
+	background-image: -o-linear-gradient(top, #3e6105, #c5ffaa);
+	background-image: linear-gradient(to bottom, #3e6105, #c5ffaa);
+	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#3e6105, endColorstr=#c5ffaa);
+}
 
 
