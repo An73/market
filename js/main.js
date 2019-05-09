@@ -180,6 +180,23 @@ $(document).ready(function(){
         });
     });
 
+    $("#personal-cabinet").click(function() {
+        let data = {'action' : 'check_admin'};
+        data = JSON.stringify(data);
+        $.ajax({
+            type:"POST",
+            url: "php/main.php",
+            contentType: "application/json",
+            data: data,
+            success: function(msg) {
+                if (msg == '1') {
+                    $(location).attr('href', 'admin.html')
+                }
+                console.log(msg);
+            }
+        });
+    });
+
     
 });
 

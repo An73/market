@@ -55,6 +55,13 @@ class DbHelper {
         return $stmt->fetch();
     }
 
+    function isAdmin($User_login) {
+        $stmt = $this->pdo->query("SELECT User_admin
+                                    FROM $this->table_user
+                                    Where User_login='$User_login';");
+        return $stmt->fetch();
+    }
+
     function getProduct() {
         $stmt = $this->pdo->query("SELECT * 
                                     FROM $this->table_products;");

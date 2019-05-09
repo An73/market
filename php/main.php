@@ -50,6 +50,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             case 'product_place':
                 $ret = $dbh->getProduct();
                 echo json_encode($ret);
+                exit;
+            case 'check_admin':
+                if (isset($_SESSION['User'])) {
+                    $ret = $dbh->isAdmin($_SESSION['User']);
+                    echo $ret['User_admin'];
+                    exit;
+                }
+                echo '0';
+                exit;
         }
         // echo json_encode(array('foo' => 'bar'));
         //echo json_encode($errs);
