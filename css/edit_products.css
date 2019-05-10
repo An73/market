@@ -1,7 +1,10 @@
 body {
-    background-color: #bdbdbd;
+	background-color: #bdbdbd;
+	margin:0;
 }
-
+header {
+	height: 15px;
+}
 .top-button {
     display: flex;
     justify-content: space-between;
@@ -9,7 +12,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 5px;
-    margin-top: 15px;
+    /* margin-top: 15px; */
 }
 
 table {
@@ -77,6 +80,253 @@ button:hover {
 }
 
 button:focus {
+    outline: none;
+    color: #ffffff;
+    background-color: #9b9b9b;
+ 	background-image: -webkit-gradient(linear, left top, left bottom, from(#9b9b9b), to(#3A4C7D));
+ 	background-image: -webkit-linear-gradient(top, #9b9b9b, #3A4C7D);
+ 	background-image: -moz-linear-gradient(top, #9b9b9b, #3A4C7D);
+ 	background-image: -ms-linear-gradient(top, #9b9b9b, #3A4C7D);
+ 	background-image: -o-linear-gradient(top, #9b9b9b, #3A4C7D);
+ 	background-image: linear-gradient(to bottom, #9b9b9b, #3A4C7D);
+ 	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#9b9b9b, endColorstr=#3A4C7D);
+}
+
+.modal-edit {
+	display: block;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(29, 29, 29, 0.829);
+}
+
+.modal-content {
+	display: block;
+	/* height: 500px; */
+	width: 30%;
+	margin: 5% auto;
+	background-color: rgba(221, 221, 221, 0.8);
+	border: 3px solid;
+	border-color: #ffd664;
+	border-radius: 4px;
+}
+
+.form-edit {
+	display: flex;
+	flex-direction: column;
+}
+
+.form-edit * {
+	margin-top: 3%;
+	margin-bottom: 3%;
+}
+
+.form-edit input[type="text"] {
+	font-family: Helvetica, sans-serif;
+	font-size: 15px;
+	height: 30px;
+	margin-left: 5%;
+	margin-right: 5%;
+	background-color: rgba(255, 220, 124, 0.788);
+	border: 2px solid #ffe18e;
+	border-radius: 2px;
+	color: #6b6b6b;
+}
+
+.form-edit input[type="text"]::placeholder {
+	text-align: center;
+}
+
+.form-edit input[type="text"]:hover {
+	background-color: rgb(255, 220, 124);
+}
+
+.form-edit input[type="text"]:focus {
+	background-color: #ffcf4b;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	outline: none;
+}
+
+/*
+input[type="radio"] {
+	display: none;
+}
+
+.l-radio::before {
+	content: '';
+	display: inline-block;
+	width: 22px;
+	height: 22px;
+	background-color: rgb(255, 220, 124);;
+	vertical-align: middle;
+	margin-right: 10px;
+	transition: 0.4s;
+	border: 2px solid #414141;
+	border-radius: 50%;
+}
+.l-radio:hover {
+	color: #fff6c1;
+}
+.l-radio::after {
+	color: #fff6c1;
+}
+
+input[type="radio"]:hover + .l-radio::before {
+	background-color: #fff6c1;
+}
+
+input[type="radio"]:checked + .l-radio::before{
+	content: '✓';
+	text-align: center;
+	background-color: #ad7018;
+	color: #fff6c1;
+}
+
+.l-radio::before + input[type="radio"]:checked {
+	color: #fff6c1;
+}
+*/
+
+.head-text{
+	font-family: 'Helvetica', sans-serif;
+	font-size: 22px;
+	text-align: center;
+	margin-bottom: 2%;
+	color: #303030;
+}
+
+.form-radio {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	margin-top:0;
+	padding-bottom: 4%;
+	border-bottom: solid #ffd664;
+}
+
+input[type="radio"] {
+	display: none;
+}
+
+ .l-radio {
+	font-family: 'Helvetica';
+    font-size: 18px;
+    color: #414141;
+}
+
+.l-radio:hover {
+	color:#242424;
+}
+
+.l-radio::before {
+	content: '';
+	display: inline-block;
+	width: 22px;
+	height: 22px;
+	background-color: rgb(255, 220, 124);
+	vertical-align: middle;
+	margin-right: 5px;
+	transition: 0.4s;
+	border: 2px solid #414141;
+	border-radius: 50%;
+}
+
+
+.l-radio:hover:before {
+	background-color: rgb(252, 203, 67);
+	border: 2px solid #303030;
+}
+
+input[type="radio"]:checked + .l-radio::before{
+	background-color: rgb(255, 131, 115);
+	border: 2px solid #161616;
+}
+
+input[type="radio"]:checked + .l-radio{
+	color: rgb(17, 17, 17);;
+}
+
+.form-checkbox {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	border-bottom: solid #ffd664;
+}
+
+input[type="checkbox"] {
+	display: none;
+}
+
+.l-checkbox::before{
+	display: inline-block;
+	content: attr(for);
+	margin-right: 2px;
+	margin-left: 2px;
+	color:#414141;
+	font-family: Helvetica, sans-serif;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	width: 38px;
+	background-color: rgb(255, 220, 124);
+	transition: 0.4s;
+	border: 2px solid #414141;
+	border-radius: 10%;
+}
+
+.l-checkbox:hover:before {
+	background-color: rgb(252, 203, 67);
+	border: 2px solid #303030;
+	color: #303030;
+}
+
+input[type="checkbox"]:checked + .l-checkbox::before {
+	background-color: rgb(255, 131, 115);
+	border: 2px solid #161616;
+	color: #161616;
+}
+
+.submit-modal-btn {
+	
+    width: 20%;
+	border-color:#3A4C7D;
+	border-width: 0px 0px 2px 0px;
+	border-style: solid;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	font-size:14px;
+	font-family:'Helvetica', sans-serif;
+	padding: 6px 6px 6px 6px;
+	text-decoration:none;
+	display:inline-block;
+	color: #414141;
+ 	background-color: rgb(255, 240, 174);
+ 	background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(255, 240, 174)), to(rgb(252, 203, 67)));
+ 	background-image: -webkit-linear-gradient(top, rgb(255, 240, 174), rgb(252, 203, 67));
+ 	background-image: -moz-linear-gradient(top, rgb(255, 240, 174), rgb(252, 203, 67));
+ 	background-image: -ms-linear-gradient(top, rgb(255, 240, 174), rgb(252, 203, 67));
+ 	background-image: -o-linear-gradient(top, rgb(255, 240, 174), rgb(252, 203, 67));
+ 	background-image: linear-gradient(to bottom, rrgb(255, 240, 174), rgb(252, 203, 67));
+ 	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=rgb(255, 240, 174), endColorstr=rgb(252, 203, 67));
+
+	 margin-bottom: 4%;
+	 margin-left: auto;
+	 margin-right: auto;
+}
+
+.submit-modal-btn:hover {
+    background-color: #ffd664;
+ 	background-image: -webkit-gradient(linear, left top, left bottom, from(#ffd664), to(rgb(252, 203, 67)));
+ 	background-image: -webkit-linear-gradient(top, #ffd664, rgb(252, 203, 67));
+ 	background-image: -moz-linear-gradient(top, #ffd664, rgb(252, 203, 67));
+ 	background-image: -ms-linear-gradient(top, #ffd664, rgb(252, 203, 67));
+ 	background-image: -o-linear-gradient(top, #ffd664, rgb(252, 203, 67));
+ 	background-image: linear-gradient(to bottom, #ffd664, rgb(252, 203, 67));
+ 	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffd664, endColorstr=rgb(252, 203, 67));
+}
+
+.submit-modal-btn:focus {
     outline: none;
     color: #ffffff;
     background-color: #9b9b9b;

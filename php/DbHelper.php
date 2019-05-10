@@ -29,6 +29,15 @@ class DbHelper {
                     Email VARCHAR(320) NOT NULL,
                     Passwd VARCHAR(70) NOT NULL,
                     User_admin BOOLEAN DEFAULT '0');
+                CREATE TABLE IF NOT EXISTS $this->table_products 
+                    (ID INT(10) AUTO_INCREMENT PRIMARY KEY, 
+                    Brand ENUM('adidas', 'nike', 'reebok', 'puma') NOT NULL,
+                    Name VARCHAR(40) NOT NULL,
+                    Size SET('4', '4.5', '5', '5.5', '6', '6.5', '7', '7.5', '8', '8.5', '9', '9.5', '10', '10.5', '11', '11.5', '12', '12.5', '13', '14', '15', '16', '17', '18') NOT NULL,
+                    Sex ENUM('W', 'M') NOT NULL,
+                    Cost INT NOT NULL,
+                    Link_image VARCHAR(200) NOT NULL,
+                    Type ENUM('Running', 'Training', 'Lifestyle'));
                 INSERT IGNORE INTO $this->table_user (ID, User_login, Email, Passwd, User_admin)
                         VALUE ('1', 'admin', 'admin@admin.com', '$passAdm', '1'); ";
         $this->pdo->exec($sql);

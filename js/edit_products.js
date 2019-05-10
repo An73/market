@@ -4,14 +4,15 @@ function product_view(msg) {
             $("table").append(
             '<tr>\
                 <td>' + col['ID'] + '</td>\
+                <td>' + col['Brand'] + '</td>\
                 <td>' + col['Name'] + '</td>\
                 <td>' + col['Size'] + '</td>\
                 <td>' + col['Sex'] + '</td>\
                 <td>' + col['Cost'] + '</td>\
                 <td>' + col['Link_image'] + '</td>\
                 <td>' + col['Type'] + '</td>\
-                <td><button>Edit</button></td>\
-                <td><button>Delete</button></td>\
+                <td><button id="btn-edit" name="' + col['ID'] + '">Edit</button></td>\
+                <td><button id="btn-delete" name="' + col['ID'] + '">Delete</button></td>\
             </tr>'
             );
         });
@@ -20,14 +21,15 @@ function product_view(msg) {
         $("table").append(
             '<tr>\
                 <td>' + col['ID'] + '</td>\
+                <td>' + col['Brand'] + '</td>\
                 <td>' + col['Name'] + '</td>\
                 <td>' + col['Size'] + '</td>\
                 <td>' + col['Sex'] + '</td>\
                 <td>' + col['Cost'] + '</td>\
                 <td>' + col['Link_image'] + '</td>\
                 <td>' + col['Type'] + '</td>\
-                <td><button>Edit</button></td>\
-                <td><button>Delete</button></td>\
+                <td><button id="btn-edit" name="' + col['ID'] + '">Edit</button></td>\
+                <td><button id="btn-delete" name="' + col['ID'] + '">Delete</button></td>\
             </tr>'
         );
     }
@@ -40,6 +42,7 @@ function product_list() {
         contentType: "application/json",
         data: JSON.stringify({'action':'product_place'}),
         success: function(msg) {
+            console.log(msg);
             msg = JSON.parse(msg);
             product_view(msg);
         }
@@ -48,4 +51,6 @@ function product_list() {
 
 $(document).ready(function(){
     product_list();
+
+    $()
 });

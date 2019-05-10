@@ -14,6 +14,98 @@
 	</div> -->
 
 	<body>
+        <div id="modal-edit" class="modal-edit">
+            <div class="modal-content">
+                <form id="form-edit" class="form-edit">
+                    <input required type="text" name="name" class="input-modal" placeholder="Name">
+                    <input required type="text" name="cost" class="input-modal" placeholder="Cost">
+                    <input required type="text" name="link_image" class="input-modal" placeholder="Link image">
+                    
+                    <label class="head-text">Gender</label>
+                    <div id="form-sex" class="form-radio">
+                        <input required type="radio" name="sex" value="M" id="M">
+                        <label class="l-radio" for="M">Male</label>
+                        <input required type="radio" name="sex" value="W" id="W">
+                        <label class="l-radio" for="W">Female</label>
+                    </div>
+
+                    <label class="head-text">Type</label>
+                    <div id="form-type" class="form-radio">
+                        <input required type="radio" name="type" value="Lifestyle" id="Lifestyle">
+                        <label class="l-radio" for="Lifestyle">Lifestyle</label>
+                        <input required type="radio" name="type" value="Training" id="Training">
+                        <label class="l-radio" for="Training">Training</label>
+                        <input required type="radio" name="type" value="Running" id="Running">
+                        <label class="l-radio" for="Running">Running</label>
+                    </div>
+
+                    <label class="head-text">Brand</label>
+                    <div id="form-brand" class="form-radio">
+                        <input required type="radio" name="brand" value="adidas" id="adidas">
+                        <label class="l-radio" for="adidas">Adidas</label>
+                        <input required type="radio" name="brand" value="nike" id="nike">
+                        <label class="l-radio" for="nike">Nike</label>
+                        <input required type="radio" name="brand" value="reebok" id="reebok">
+                        <label class="l-radio" for="reebok">Reebok</label>
+                        <input required type="radio" name="brand" value="puma" id="puma">
+                        <label class="l-radio" for="puma">Puma</label>
+                    </div>
+                    <label class="head-text">Size</label>
+                    <div id="form-size" class="form-checkbox">
+                        <input required type="checkbox" name="size" value="s4" id="4">
+                        <label class="l-checkbox" for="4"></label>
+                        <input required type="checkbox" name="size" value="s45" id="4.5">
+                        <label class="l-checkbox" for="4.5"></label>
+                        <input required type="checkbox" name="size" value="s5" id="5">
+                        <label class="l-checkbox" for="5"></label>
+                        <input required type="checkbox" name="size" value="s55" id="5.5">
+                        <label class="l-checkbox" for="5.5"></label>
+                        <input required type="checkbox" name="size" value="s6" id="6">
+                        <label class="l-checkbox" for="6"></label>
+                        <input required type="checkbox" name="size" value="s65" id="6.5">
+                        <label class="l-checkbox" for="6.5"></label>
+                        <input required type="checkbox" name="size" value="s7" id="7">
+                        <label class="l-checkbox" for="7"></label>
+                        <input required type="checkbox" name="size" value="s75" id="7.5">
+                        <label class="l-checkbox" for="7.5"></label>
+                        <input required type="checkbox" name="size" value="s8" id="8">
+                        <label class="l-checkbox" for="8"></label>
+                        <input required type="checkbox" name="size" value="s85" id="8.5">
+                        <label class="l-checkbox" for="8.5"></label>
+                        <input required type="checkbox" name="size" value="s9" id="9">
+                        <label class="l-checkbox" for="9"></label>
+                        <input required type="checkbox" name="size" value="s95" id="9.5">
+                        <label class="l-checkbox" for="9.5"></label>
+                        <input required type="checkbox" name="size" value="s10" id="10">
+                        <label class="l-checkbox" for="10"></label>
+                        <input required type="checkbox" name="size" value="s105" id="10.5">
+                        <label class="l-checkbox" for="10.5"></label>
+                        <input required type="checkbox" name="size" value="s11" id="11">
+                        <label class="l-checkbox" for="11"></label>
+                        <input required type="checkbox" name="size" value="s115" id="11.5">
+                        <label class="l-checkbox" for="11.5"></label>
+                        <input required type="checkbox" name="size" value="s12" id="12">
+                        <label class="l-checkbox" for="12"></label>
+                        <input required type="checkbox" name="size" value="s125" id="12.5">
+                        <label class="l-checkbox" for="12.5"></label>
+                        <input required type="checkbox" name="size" value="s13" id="13">
+                        <label class="l-checkbox" for="13"></label>
+                        <input required type="checkbox" name="size" value="s14" id="14">
+                        <label class="l-checkbox" for="14"></label>
+                        <input required type="checkbox" name="size" value="s15" id="15">
+                        <label class="l-checkbox" for="15"></label>
+                        <input required type="checkbox" name="size" value="s16" id="16">
+                        <label class="l-checkbox" for="16"></label>
+                        <input required type="checkbox" name="size" value="s17" id="17">
+                        <label class="l-checkbox" for="17"></label>
+                        <input required type="checkbox" name="size" value="s18" id="18">
+                        <label class="l-checkbox" for="18"></label>
+                    </div>
+                    <input required type="submit" class="submit-modal-btn" id="submit-modal-btn"  value="Edit">
+                </form>
+            </div>
+        </div>
+        <header></header>
         <div class='top-button'>
             <button>Exit</button>
             <button>Add Product</button>
@@ -21,6 +113,7 @@
         <table width=90% cellspacing="0">
             <tr>
                 <th>ID</th>
+                <th>Brand</th>
                 <th>Name</th>
                 <th>Size</th>
                 <th>Sex</th>
@@ -32,6 +125,7 @@
             </tr>
             <tr>
                 <td>1</td>
+                <td>puma</td>
                 <td>RS-X Tech Motorola Sneakers</td>
                 <td>15,16</td>
                 <td>M</td>
@@ -43,6 +137,7 @@
             </tr>
             <tr>
                 <td>1</td>
+                <td>puma</td>
                    <td>RS-X Tech Motorola Sneakers</td>
                    <td>15,16</td>
                    <td>M</td>
@@ -54,6 +149,7 @@
             </tr>
             <tr>
                 <td>1</td>
+                <td>puma</td>
                    <td>RS-X Tech Motorola Sneakers</td>
                    <td>15,16</td>
                    <td>M</td>
