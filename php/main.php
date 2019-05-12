@@ -59,6 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
                 echo '0';
                 exit;
+            case 'update':
+                echo json_encode($dbh->updateProduct($data));
         }
         // echo json_encode(array('foo' => 'bar'));
         //echo json_encode($errs);

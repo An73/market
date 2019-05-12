@@ -76,6 +76,28 @@ class DbHelper {
                                     FROM $this->table_products;");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    function updateProduct(array $arr_update) {
+        $brand = $arr_update['brand'];
+        $name = $arr_update['name'];
+        $size = $arr_update['size'];
+        $sex = $arr_update['sex'];
+        $cost = $arr_update['cost'];
+        $link_image = $arr_update['link_image'];
+        $type = $arr_update['type'];
+        $id = $arr_update['id'];
+
+
+        $stmt = $this->pdo->query("UPDATE $this->table_products SET Brand='$brand',
+                                                                    `Name`='$name',
+                                                                    Size='$size',
+                                                                    Sex='$sex',
+                                                                    Cost='$cost',
+                                                                    Link_image='$link_image',
+                                                                    `Type`='$type'
+                                                                    WHERE ID = '$id';");
+        return $stmt;
+    }
     
 
     function __destruct() {
