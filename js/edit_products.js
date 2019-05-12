@@ -38,7 +38,13 @@ function product_view(msg) {
     }
     $(".btn-edit").click(function() {
         $(".btn-edit").blur();
+        // $(".form-edit").attr('id', 'form-edit');
         $("#form-edit").trigger('reset');
+
+        $(".form-header-name").remove();
+        $(".submit-modal-btn").remove();
+        $("#form-edit").prepend('<div class="form-header-name">EDIT</div>');
+        $("#form-edit").append('<input required type="submit" class="submit-modal-btn" id="submit-modal-btn"  value="Edit">');
 
         let id = "#tr-" + $(this).attr("name");
         $("#edit-inpt-name").val($(id + " .td-name").text());
@@ -75,6 +81,24 @@ function product_list() {
 $(document).ready(function(){
     product_list();
 
+    $("#btn-add-product").click(function() {
+        $("#btn-add-product").blur();
+
+        // $(".form-edit").attr('id', 'form-create');
+
+        $("#form-edit").trigger('reset');
+        $(".form-header-name").remove();
+        $(".submit-modal-btn").remove();
+
+        $("#form-edit").prepend('<div class="form-header-name">ADD PRODUCT</div>');
+        $("#form-edit").append('<input required type="submit" class="submit-modal-btn" id="submit-modal-btn"  value="Add">');
+
+        
+        $("#modal-edit").css('display', 'block');
+    })
+
+
+
     $("#modal-edit").mouseup(function (e) {
         let container = $(".modal-content");
         if (container.has(e.target).length === 0){
@@ -100,7 +124,13 @@ $(document).ready(function(){
         });
         data['size'] = size;
         data['id'] = id_product;
-        data['action'] = 'update';
+        if ($(".form-header-name").text() == 'EDIT') {
+            data['action'] = 'update';
+        }
+        else {
+            data['action'] = 'create';
+        }
+
         console.log(data);
         data = JSON.stringify(data);
         $.ajax({
@@ -114,4 +144,36 @@ $(document).ready(function(){
             }
         })
     });
+
+    // $("#form-create").submit(function(event) {
+    //     event.preventDefault();
+    //     $("#submit-modal-btn").blur();
+    //     console.log("22");
+    //     let this_form = $(this).serializeArray();
+    //     let data = {};
+    //     let size = "";
+    //     $(this_form).each(function(index, obj){
+    //         data[obj.name] = obj.value;
+    //         if (obj.name == 'size') {
+    //             if (size === "") {
+    //                 size = obj.value;
+    //             }
+    //             else 
+    //                 size = size + ',' + obj.value;
+    //         }
+    //     });
+    //     data['size'] = size;
+    //     data['action'] = 'create';
+    //     console.log(data);
+    //     data = JSON.stringify(data);
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "php/main.php",
+    //         contentType: "application/json",
+    //         data: data,
+    //         success: function(msg) {
+    //             product_list();
+    //         }
+    //     })
+    // });
 });

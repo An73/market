@@ -103,8 +103,11 @@ button:focus {
 .modal-content {
 	display: block;
 	/* height: 500px; */
-	width: 30%;
-	margin: 5% auto;
+	width: 27%;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	margin-left:auto;
+	margin-right: auto;
 	background-color: rgba(221, 221, 221, 0.8);
 	border: 3px solid;
 	border-color: #ffd664;
@@ -117,8 +120,8 @@ button:focus {
 }
 
 .form-edit * {
-	margin-top: 3%;
-	margin-bottom: 3%;
+	margin-top: 2%;
+	margin-bottom: 2%;
 }
 
 .form-edit input[type="text"] {
@@ -189,6 +192,12 @@ input[type="radio"]:checked + .l-radio::before{
 	color: #fff6c1;
 }
 */
+
+.form-header-name {
+	font-family: 'Helvetica', sans-serif;
+	font-size: 24px;
+	text-align: center;
+}
 
 .head-text{
 	font-family: 'Helvetica', sans-serif;

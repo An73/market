@@ -98,6 +98,21 @@ class DbHelper {
                                                                     WHERE ID = '$id';");
         return $stmt;
     }
+
+    function createProduct(array $arr_create) {
+        $brand = $arr_create['brand'];
+        $name = $arr_create['name'];
+        $size = $arr_create['size'];
+        $sex = $arr_create['sex'];
+        $cost = $arr_create['cost'];
+        $link_image = $arr_create['link_image'];
+        $type = $arr_create['type'];
+
+        $stmt = $this->pdo->query("INSERT INTO $this->table_products 
+                                    (`ID`, `Brand`, `Name`, `Size`, `Sex`, `Cost`, `Link_image`, `Type`) VALUES 
+                                    (NULL, '$brand', '$name', '$size', '$sex', '$cost', '$link_image', '$type');");
+        return $stmt;
+    }
     
 
     function __destruct() {
