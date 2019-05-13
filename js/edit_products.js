@@ -15,7 +15,7 @@ function product_view(msg) {
                 <td class="td-link">' + col['Link_image'] + '</td>\
                 <td class="td-type">' + col['Type'] + '</td>\
                 <td><button class="btn-edit" name="' + col['ID'] + '">Edit</button></td>\
-                <td><button id="btn-delete" name="' + col['ID'] + '">Delete</button></td>\
+                <td><button class="btn-delete" name="' + col['ID'] + '">Delete</button></td>\
             </tr>'
             );
         });
@@ -32,7 +32,7 @@ function product_view(msg) {
                 <td class="td-link">' + msg['Link_image'] + '</td>\
                 <td class="td-type">' + msg['Type'] + '</td>\
                 <td><button class="btn-edit" name="' + msg['ID'] + '">Edit</button></td>\
-                <td><button id="btn-delete" name="' + msg['ID'] + '">Delete</button></td>\
+                <td><button class="btn-delete" name="' + msg['ID'] + '">Delete</button></td>\
             </tr>'
         );
     }
@@ -60,6 +60,22 @@ function product_view(msg) {
             $("#es" + element).prop("checked", true);
         });
         $("#modal-edit").css('display', 'block');
+    });
+
+    $(".btn-delete").click(function() {
+        $(".btn-delete").blur();
+        let data = {'action' : 'delete', 'id' : $(this).attr("name")};
+        $.ajax({
+            type: "POST",
+            url: "php/main.php",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function(msg) {
+                msg = JSON.parse(msg);
+                console.log(msg);
+                product_list();
+            }
+        });
     });
 }
 
@@ -142,8 +158,13 @@ $(document).ready(function(){
                 console.log(JSON.parse(msg));
                 product_list();
             }
-        })
+        });
     });
+
+    $("#btn-exit").click(function() {
+        $("#btn-exit").blur();
+        $(location).attr('href', 'index.php');
+    })
 
     // $("#form-create").submit(function(event) {
     //     event.preventDefault();

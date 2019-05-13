@@ -77,6 +77,27 @@ class DbHelper {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    function getUsers() {
+        $stmt = $this->pdo->query("SELECT * FROM $this->table_user;");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function deleteProduct($id) {
+        $stmt = $this->pdo->query("DELETE FROM $this->table_products WHERE ID='$id'");
+        return $stmt;
+    }
+
+    function deleteUser($id) {
+        $stmt = $this->pdo->query("DELETE FROM $this->table_user WHERE ID='$id'");
+        return $stmt;
+    }
+
+    function updateAdminUser($id, $admin) {
+        $stmt = $this->pdo->query("UPDATE $this->table_user SET User_admin='$admin'
+                                                            WHERE ID = '$id';");
+        return $stmt;
+    }
+
     function updateProduct(array $arr_update) {
         $brand = $arr_update['brand'];
         $name = $arr_update['name'];

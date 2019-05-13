@@ -66,6 +66,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             case 'create':
                 echo json_encode($dbh->createProduct($data));
                 exit;
+            case 'delete':
+                echo json_encode($dbh->deleteProduct($data['id']));
+                exit;
+            case 'user_place':
+                $ret = $dbh->getUsers();
+                echo json_encode($ret);
+                exit;
+            case 'update_admin':
+                echo json_encode($dbh->updateAdminUser($data['id'], $data['admin']));
+                exit;
+            case 'delete_user':
+                echo json_encode($dbh->deleteUser($data['id']));
+                exit;
         }
         // echo json_encode(array('foo' => 'bar'));
         //echo json_encode($errs);

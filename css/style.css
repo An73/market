@@ -35,6 +35,10 @@ header ul {
 	padding: 0;
 }
 
+aside {
+	
+}
+
 .sign_in_input {
 	background: #ffd351;
 	border: 2px solid #66502c;
@@ -220,6 +224,9 @@ li {
     font-size: 18px;
     color: #ddbe75;
     transition: 0.3s;
+}
+aside {
+	float: left;
 }
 
 .block input[type="checkbox"] {
@@ -557,4 +564,41 @@ input[type="checkbox"]:checked + .l_checkbox::before{
 	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#3e6105, endColorstr=#c5ffaa);
 }
 
+.size-block {
+	display: block;
+	float: left;
+	width: 250px;
+	margin: 0;
+	padding: 0;
+	border: 2px solid black;
+	border-top: 0;
+	border-left: 0;
+	background: #845108;
+}
 
+.size-block .header {
+	display: flex;
+	align-items: center;
+    justify-content: center;
+    height: 40px;
+
+	background-color: #ffd351;
+ 	background-image: -webkit-gradient(linear, left top, left bottom, from(#ffd351), to(#845108));
+ 	background-image: -webkit-linear-gradient(top, #ffd351, #845108);
+ 	background-image: -moz-linear-gradient(top, #ffd351, #845108);
+ 	background-image: -ms-linear-gradient(top, #ffd351, #845108);
+ 	background-image: -o-linear-gradient(top, #ffd351, #845108);
+ 	background-image: linear-gradient(to bottom, #ffd351, #845108);
+ 	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffd351, endColorstr=#845108);
+
+
+    font-family: 'Helvetica';
+    font-size: 22px;
+    color: #603f00;
+}
+
+.checkbox-size-block {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: space-around;
+}

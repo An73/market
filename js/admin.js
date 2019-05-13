@@ -29,4 +29,13 @@ $(document).ready(function(){
         $(this).css({'background-color': '#363636', 'background-image': 'none'});
     });
 
+    $(".right-half").click(function(){
+        $(location).attr('href', 'edit_products.html');
+    });
+
+    $(".left-half").click(function(){
+        $(location).attr('href', 'edit_users.html');
+    });
+
+
 });
