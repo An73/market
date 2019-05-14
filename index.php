@@ -21,10 +21,13 @@
 		<meta charset="utf-8">
 		<title>Market</title>
 		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/jquery-ui.css">
 
 		<script src="./js/jquery-3.4.0.js"></script>
 		<script src="./js/jquery.form.js"></script>
 		<script src="./js/main.js"></script>
+		<script src="./js/jquery-ui.min.js"></script>
+		<script src="./js/jquery.ui.touch-punch.min.js"></script>
 	</head>
 	<!-- <div id="signup_form_container">
 	</div> -->
@@ -98,6 +101,15 @@
 		</header>
 		<aside>
 			<div class="block">
+				<div class="filter-block">
+					<label class="header">Price</label>
+					<span id="result-polzunok"></span>
+					<div id="filter-slider" class="filter-slider">
+
+					</div>
+				</div>
+			</div>
+			<div class="block">
 				<div class="brand_block">
 					<label class="header">Brand</label>
 					<input type="checkbox" id="adidas" name="brand">
@@ -111,57 +123,57 @@
 				</div>
 			</div>
 			<div class="block">
-				<div id="form-size" class="size-block">
+				<div id="form-size" class="filter-block">
 					<label class="header">Size</label>
 					<!-- <div class="checkbox-size-block"> -->
                         <input type="checkbox" name="size" value="4" id="es4">
-                        <label class="l_checkbox" value="4" for="es4"></label>
+                        <label class="l-checkbox-size" value="4" for="es4"></label>
                         <input type="checkbox" name="size" value="4.5" id="es4.5">
-                        <label class="l_checkbox"  for="es4.5" value="4.5" ></label>
+                        <label class="l-checkbox-size"  for="es4.5" value="4.5" ></label>
                         <input type="checkbox" name="size" value="5" id="es5">
-                        <label class="l_checkbox " for="es5" value="5" ></label>
+                        <label class="l-checkbox-size " for="es5" value="5" ></label>
                         <input type="checkbox" name="size" value="5.5" id="es5.5">
-                        <label class="l_checkbox"  for="es5.5" value="5.5" ></label>
+                        <label class="l-checkbox-size"  for="es5.5" value="5.5" ></label>
                         <input type="checkbox" name="size" value="6" id="es6">
-                        <label class="l_checkbox " for="es6" value="6" ></label>
+                        <label class="l-checkbox-size " for="es6" value="6" ></label>
                         <input type="checkbox" name="size" value="6.5" id="es6.5">
-                        <label class="l_checkbox"  for="es6.5" value="6.5" ></label>
+                        <label class="l-checkbox-size"  for="es6.5" value="6.5" ></label>
                         <input type="checkbox" name="size" value="7" id="es7">
-                        <label class="l_checkbox " for="es7" value="7" ></label>
+                        <label class="l-checkbox-size " for="es7" value="7" ></label>
                         <input type="checkbox" name="size" value="7.5" id="es7.5">
-                        <label class="l_checkbox"  for="es7.5" value="7.5" ></label>
+                        <label class="l-checkbox-size"  for="es7.5" value="7.5" ></label>
                         <input type="checkbox" name="size" value="8" id="es8">
-                        <label class="l_checkbox " for="es8" value="8" ></label>
+                        <label class="l-checkbox-size " for="es8" value="8" ></label>
                         <input type="checkbox" name="size" value="8.5" id="es8.5">
-                        <label class="l_checkbox"  for="es8.5" value="8.5" ></label>
+                        <label class="l-checkbox-size"  for="es8.5" value="8.5" ></label>
                         <input type="checkbox" name="size" value="9" id="es9">
-                        <label class="l_checkbox " for="es9" value="9" ></label>
+                        <label class="l-checkbox-size " for="es9" value="9" ></label>
                         <input type="checkbox" name="size" value="9.5" id="es9.5">
-                        <label class="l_checkbox"  for="es9.5" value="9.5" ></label>
+                        <label class="l-checkbox-size"  for="es9.5" value="9.5" ></label>
                         <input type="checkbox" name="size" value="10" id="es10">
-                        <label class="l_checkbox"  for="es10" value="10" ></label>
+                        <label class="l-checkbox-size"  for="es10" value="10" ></label>
                         <input type="checkbox" name="size" value="10.5" id="es10.5">
-                        <label class="l_checkbox" for="es10.5" value="10.5" ></label>
+                        <label class="l-checkbox-size" for="es10.5" value="10.5" ></label>
                         <input type="checkbox" name="size" value="11" id="es11">
-                        <label class="l_checkbox"  for="es11" value="11" ></label>
+                        <label class="l-checkbox-size"  for="es11" value="11" ></label>
                         <input type="checkbox" name="size" value="11.5" id="es11.5">
-                        <label class="l_checkbox" for="es11.5" value="11.5" ></label>
+                        <label class="l-checkbox-size" for="es11.5" value="11.5" ></label>
                         <input type="checkbox" name="size" value="12" id="es12">
-                        <label class="l_checkbox"  for="es12" value="12" ></label>
+                        <label class="l-checkbox-size"  for="es12" value="12" ></label>
                         <input type="checkbox" name="size" value="12.5" id="es12.5">
-                        <label class="l_checkbox" for="es12.5" value="12.5" ></label>
+                        <label class="l-checkbox-size" for="es12.5" value="12.5" ></label>
                         <input type="checkbox" name="size" value="13" id="es13">
-                        <label class="l_checkbox"  for="es13" value="13" ></label>
+                        <label class="l-checkbox-size"  for="es13" value="13" ></label>
                         <input type="checkbox" name="size" value="14" id="es14">
-                        <label class="l_checkbox"  for="es14" value="14" ></label>
+                        <label class="l-checkbox-size"  for="es14" value="14" ></label>
                         <input type="checkbox" name="size" value="15" id="es15">
-                        <label class="l_checkbox"  for="es15" value="15" ></label>
+                        <label class="l-checkbox-size"  for="es15" value="15" ></label>
                         <input type="checkbox" name="size" value="16" id="es16">
-                        <label class="l_checkbox"  for="es16" value="16" ></label>
+                        <label class="l-checkbox-size"  for="es16" value="16" ></label>
                         <input type="checkbox" name="size" value="17" id="es17">
-                        <label class="l_checkbox"  for="es17" value="17" ></label>
+                        <label class="l-checkbox-size"  for="es17" value="17" ></label>
                         <input type="checkbox" name="size" value="18" id="es18">
-						<label class="l_checkbox"  for="es18" value="18" ></label>
+						<label class="l-checkbox-size"  for="es18" value="18" ></label>
 					<!-- </div> -->
                 </div>
 			</div>

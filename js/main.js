@@ -1,6 +1,16 @@
 
 
 $(document).ready(function(){
+
+    $("#filter-slider").slider({
+        animate: "slow",
+        range: true,
+        values: [0, 150],
+        slide: function(event, ui) {
+            
+        }
+    });
+
     check_session();
     product_place();
     let modalSignUp = document.getElementById('modalSignup');
