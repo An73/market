@@ -100,6 +100,7 @@
 			</div>
 		</header>
 		<aside>
+			<form id="filter-form">
 			<div class="block">
 				<div class="filter-block">
 					<label class="header">Price</label>
@@ -116,13 +117,13 @@
 			<div class="block">
 				<div class="brand_block">
 					<label class="header">Brand</label>
-					<input type="checkbox" id="adidas" name="brand">
+					<input type="checkbox" id="adidas" value="adidas" name="brand">
 					<label class="l_checkbox" for="adidas">Adidas</label>
-					<input type="checkbox" id="nike" name="brand">
+					<input type="checkbox" id="nike" value="nike" name="brand">
 					<label class="l_checkbox" for="nike">Nike</label>
-					<input type="checkbox" id="reebok" name="brand">
+					<input type="checkbox" id="reebok" value="reebok" name="brand">
 					<label class="l_checkbox" for="reebok">Reebok</label>
-					<input type="checkbox" id="puma" name="brand">
+					<input type="checkbox" id="puma" value="puma" name="brand">
 					<label class="l_checkbox" for="puma">Puma</label>
 				</div>
 			</div>
@@ -199,9 +200,10 @@
 					</div>
 				</div>
 			</div>
+			</form>
 		</aside>
 		<div id="product-place">
-			<div id="product">
+			<!-- <div id="product">
 				<div id="product-img">
 					<img src="test.jpg">
 				</div>
@@ -221,7 +223,7 @@
 			<div id="product">
 			</div>
 			<div id="product">
-			</div>
+			</div> -->
 		</div>
 		<!-- <div class="search">
 			<form>

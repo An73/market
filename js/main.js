@@ -208,6 +208,43 @@ $(document).ready(function(){
         });
     });
 
+    $("#filter-form").submit(function(event){
+        event.preventDefault();
+        $(".button-filter-submit").blur();
+        let this_form = $(this).serializeArray();
+        let size = "";
+        let data = {"brand": Array(), "size": size, "sex": Array()};
+        $(this_form).each(function(index, obj){
+            if (obj.name == "brand") {
+                data['brand'].push(obj.value);
+            }
+            else if (obj.name == "sex") {
+                data['sex'].push(obj.value);
+            }
+            else if (obj.name == "size") {
+                if (size === "")
+                    size = obj.value;
+                else 
+                    size = size + ',' + obj.value;
+            }
+        });
+        data['size'] = size;
+        data['price_min'] = $("#result-start").text();
+        data['price_max'] = $("#result-end").text();
+        data['action'] = "filter";
+        console.log(data);
+
+        $.ajax({
+            type: "POST",
+            url: "php/main.php",
+            contentType: "application/json",
+            data: data,
+            success: function(msg) {
+                console.log(msg);
+            }
+        })
+    });
+
     $("#logout-btn-header").click(function() {
         
         let data = {'action':'logout'};
