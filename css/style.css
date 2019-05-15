@@ -178,7 +178,7 @@ li {
 	padding: 0;
 	border: 4px solid #a67939;
 	border-top: 0;
-	border-left: 0;
+	/* border-left: 0; */
 	width: 250px;
 }
 
@@ -222,7 +222,7 @@ li {
 
     font-family: 'Helvetica';
     font-size: 18px;
-    color: #ddbe75;
+    color: rgb(255, 220, 124);
     transition: 0.3s;
 }
 aside {
@@ -238,7 +238,7 @@ aside {
 	display: inline-block;
 	width: 22px;
 	height: 22px;
-	background-color: #ddbe75;
+	background-color: rgb(255, 220, 124);
 	vertical-align: middle;
 	margin-right: 10px;
 	transition: 0.4s;
@@ -572,7 +572,7 @@ input[type="checkbox"]:checked + .l_checkbox::before{
 	padding: 0;
 	border: 4px solid #a67939;
 	border-top: 0;
-	border-left: 0;
+	/* border-left: 0; */
 	background: #845108;
 }
 
@@ -631,14 +631,17 @@ input[type="checkbox"]:checked + .l-checkbox-size::before {
 	color: #161616;
 }
 
+
+
 .filter-slider {
 	width: 240px;
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: 15px;
 }
 
 .ui-slider.ui-slider-horizontal {
-    background: #BFE2FF;
+    background: rgb(255, 229, 113);
     height:4px;
 	border:none;
 	width: 210px;
@@ -651,4 +654,96 @@ input[type="checkbox"]:checked + .l-checkbox-size::before {
 .ui-slider-horizontal .ui-slider-handle {
     top: -.6em;
     margin-left: -.6em;
+}
+
+.result-slider {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 230px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 15px;
+}
+
+.result-slider div {
+	font-family: Helvetica, sans-serif;
+	padding: 2px;
+	background:rgb(255, 197, 37);
+	color: #473718;
+	border: 2px solid #414141;
+	border-radius: 6px;
+}
+
+.checkbox-sex {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.filter-submit-block {
+	display: flex;
+	justify-content: center;
+	padding: 15px;
+}
+
+.button-filter-submit {
+	width: 150px;
+	border: 2px solid #414141;
+	/* border-width: 0px 0px 2px 0px;
+	border-style: solid; */
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	font-size: 16px;
+	font-family: helvetica, sans-serif;
+	padding: 6px 6px 6px 6px;
+	text-decoration:none;
+	display:inline-block;
+	/* text-shadow: -1px -1px 0 rgba(0,0,0,0.3); */
+	color: #414141;
+ 	background-color: rgb(255, 220, 124);
+ 	background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(255, 220, 124)), to(rgb(252, 203, 67)));
+ 	background-image: -webkit-linear-gradient(top, rgb(255, 220, 124), rgb(252, 203, 67));
+ 	background-image: -moz-linear-gradient(top, rgb(255, 220, 124), rgb(252, 203, 67));
+ 	background-image: -ms-linear-gradient(top, rgb(255, 220, 124), rgb(252, 203, 67));
+ 	background-image: -o-linear-gradient(top, rgb(255, 220, 124), rgb(252, 203, 67));
+ 	background-image: linear-gradient(to bottom, rgb(255, 220, 124), rgb(252, 203, 67));
+ 	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=rgb(255, 220, 124), endColorstr=rgb(252, 203, 67));
+
+}
+.button-filter-submit:hover{
+	border: 2px solid #292929;
+ 	background-color: rgb(238, 184, 37);
+ 	background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(255, 212, 93)), to(rgb(219, 170, 35)));
+ 	background-image: -webkit-linear-gradient(top, rgb(255, 212, 93), rgb(219, 170, 35));
+ 	background-image: -moz-linear-gradient(top, rgb(255, 212, 93), rgb(219, 170, 35));
+ 	background-image: -ms-linear-gradient(top, rgb(255, 212, 93), rgb(219, 170, 35));
+ 	background-image: -o-linear-gradient(top, rgb(255, 212, 93), rgb(219, 170, 35));
+ 	background-image: linear-gradient(to bottom, rgb(255, 212, 93), rgb(219, 170, 35));
+ 	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=rgb(255, 212, 93), endColorstr=rgb(219, 170, 35));
+}
+.button-filter-submit:focus {
+	outline: none;
+	border: 2px solid #292929;
+ 	background-color: rgb(236, 174, 3);
+ 	background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(236, 174, 3)), to(rgb(255, 187, 0)));
+ 	background-image: -webkit-linear-gradient(top, rgb(236, 174, 3), rgb(255, 187, 0));
+ 	background-image: -moz-linear-gradient(top, rgb(236, 174, 3), rgb(255, 187, 0));
+ 	background-image: -ms-linear-gradient(top, rgb(236, 174, 3), rgb(255, 187, 0));
+ 	background-image: -o-linear-gradient(top, rgb(236, 174, 3), rgb(255, 187, 0));
+ 	background-image: linear-gradient(to bottom, rgb(236, 174, 3), rgb(255, 187, 0));
+ 	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=rgb(236, 174, 3), endColorstr=rgb(255, 187, 0));
+}
+
+#form-sex {
+	border-bottom: 3px solid #a67939;
+}
+
+
+#submit-filter {
+	border-top:0;
+	border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
 }

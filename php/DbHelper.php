@@ -134,6 +134,11 @@ class DbHelper {
                                     (NULL, '$brand', '$name', '$size', '$sex', '$cost', '$link_image', '$type');");
         return $stmt;
     }
+
+    function getRangePrice() {
+        $stmt = $this->pdo->query("SELECT min(cost) as min_price, max(cost) as max_price FROM `products`");
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     
 
     function __destruct() {

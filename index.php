@@ -104,6 +104,10 @@
 				<div class="filter-block">
 					<label class="header">Price</label>
 					<span id="result-polzunok"></span>
+					<div id="result-slider" class="result-slider">
+						<div id="result-start"></div>
+						<div id="result-end"></div>
+					</div>
 					<div id="filter-slider" class="filter-slider">
 
 					</div>
@@ -176,6 +180,24 @@
 						<label class="l-checkbox-size"  for="es18" value="18" ></label>
 					<!-- </div> -->
                 </div>
+			</div>
+			<div class="block">
+				<div id="form-sex" class="filter-block">
+					<label class="header">Sex</label>
+					<div class="checkbox-sex">
+						<input type="checkbox" name="sex" value="m" id="sm">
+						<label class="l-checkbox-size" value="M" for="sm"></label>
+                    	<input type="checkbox" name="sex" value="w" id="sw">
+                    	<label class="l-checkbox-size"  for="sw" value="W"></label>
+					</div>
+				</div>
+			</div>
+			<div class="block">
+				<div id="submit-filter" class="filter-block">
+					<div class="filter-submit-block">
+						<input type="submit" name="submit-filter" class="button-filter-submit" value="Filter">
+					</div>
+				</div>
 			</div>
 		</aside>
 		<div id="product-place">

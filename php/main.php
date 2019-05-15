@@ -79,6 +79,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             case 'delete_user':
                 echo json_encode($dbh->deleteUser($data['id']));
                 exit;
+            case 'range_price':
+                echo json_encode($dbh->getRangePrice());
+                exit;
         }
         // echo json_encode(array('foo' => 'bar'));
         //echo json_encode($errs);

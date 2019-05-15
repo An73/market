@@ -2,17 +2,19 @@
 
 $(document).ready(function(){
 
-    $("#filter-slider").slider({
-        animate: "slow",
-        range: true,
-        values: [0, 150],
-        slide: function(event, ui) {
-            
-        }
-    });
+    // $("#filter-slider").slider({
+    //     animate: "slow",
+    //     range: true,
+    //     values: [0, 150],
+    //     slide: function(event, ui) {
+    //         $("#result-start").text(ui.values[0]);
+    //         $("#result-end").text(ui.values[1]);
+    //     }
+    // });
 
     check_session();
     product_place();
+    slider();
     let modalSignUp = document.getElementById('modalSignup');
     let btnSignUp = document.getElementById('signUpBtn');
     let form_signup = document.getElementById('errors-signup');
@@ -20,6 +22,37 @@ $(document).ready(function(){
     btnSignUp.addEventListener('click', openModalSignup);
     function openModalSignup() {
         modalSignUp.style.display = 'block';
+    }
+
+    function slider() {
+        $.ajax({
+            type:"POST",
+            url: "php/main.php",
+            contentType: "application/json",
+            data: JSON.stringify({'action': 'range_price'}),
+            success: function(msg) {
+                msg = JSON.parse(msg);
+                msg['min_price'] = parseInt(msg['min_price'], 10);
+                msg['max_price'] = parseInt(msg['max_price'], 10);
+
+                console.log(msg);
+
+                $("#result-start").text(msg['min_price']);
+                $("#result-end").text(msg['max_price']);
+
+                $("#filter-slider").slider({
+                    animate: "slow",
+                    min: msg['min_price'],
+                    max: msg['max_price'],
+                    range: true,
+                    values: [msg['min_price'], msg['max_price']],
+                    slide: function(event, ui) {
+                        $("#result-start").text(ui.values[0]);
+                        $("#result-end").text(ui.values[1]);
+                    }
+                });
+            }
+        })
     }
 
     function check_session() {
