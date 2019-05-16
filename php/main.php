@@ -82,6 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             case 'range_price':
                 echo json_encode($dbh->getRangePrice());
                 exit;
+            case 'filter':
+                echo json_encode($dbh->selectFilter($data));
         }
         // echo json_encode(array('foo' => 'bar'));
         //echo json_encode($errs);

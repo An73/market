@@ -41,7 +41,7 @@ $(document).ready(function(){
                 $("#result-end").text(msg['max_price']);
 
                 $("#filter-slider").slider({
-                    animate: "slow",
+                    animate: "fast",
                     min: msg['min_price'],
                     max: msg['max_price'],
                     range: true,
@@ -93,6 +93,7 @@ $(document).ready(function(){
 
     function product_view(msg) {
         console.log(msg);
+        $("#product-place").html('');
         if (Array.isArray(msg)){
             msg.forEach(col => {
                 $("#product-place").append(
@@ -213,27 +214,39 @@ $(document).ready(function(){
         $(".button-filter-submit").blur();
         let this_form = $(this).serializeArray();
         let size = "";
-        let data = {"brand": Array(), "size": size, "sex": Array()};
+        let brand = "";
+        let sex = "";
+        let data = {"brand": brand, "size": size, "sex": sex};
         $(this_form).each(function(index, obj){
             if (obj.name == "brand") {
-                data['brand'].push(obj.value);
+                if (brand === "")
+                    brand = "'" + obj.value + "'";
+                else 
+                    brand = brand + ",'" + obj.value + "'";
             }
             else if (obj.name == "sex") {
-                data['sex'].push(obj.value);
+                if (sex === "")
+                    sex = "'" + obj.value + "'";
+                else 
+                    sex = sex + ",'" + obj.value + "'";
             }
             else if (obj.name == "size") {
                 if (size === "")
-                    size = obj.value;
+                    size = "'" + obj.value  + "'";
                 else 
-                    size = size + ',' + obj.value;
+                    size = size + ",'" + obj.value + "'";
             }
         });
+        data['min_price'] = $("#result-start").text();
+        data['max_price'] = $("#result-end").text();
         data['size'] = size;
+        data['brand'] = brand;
+        data['sex'] = sex;
         data['price_min'] = $("#result-start").text();
         data['price_max'] = $("#result-end").text();
         data['action'] = "filter";
         console.log(data);
-
+        data = JSON.stringify(data);
         $.ajax({
             type: "POST",
             url: "php/main.php",
@@ -241,6 +254,8 @@ $(document).ready(function(){
             data: data,
             success: function(msg) {
                 console.log(msg);
+                msg = JSON.parse(msg);
+                product_view(msg);
             }
         })
     });

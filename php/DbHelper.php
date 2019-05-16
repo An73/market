@@ -139,6 +139,24 @@ class DbHelper {
         $stmt = $this->pdo->query("SELECT min(cost) as min_price, max(cost) as max_price FROM `products`");
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    function selectFilter($data) {
+        $min_price = $data['min_price'];
+        $max_price = $data['max_price'];
+        $brands = $data['brand'];
+        $sex = $data['sex'];
+        $size = $data['size'];
+
+        $query = "SELECT * FROM $this->table_products WHERE Cost BETWEEN $min_price AND $max_price";
+        if (!empty($brands))
+            $query .= " AND Brand IN ($brands)";
+        if (!empty($sex))
+            $query .= " AND Sex IN ($sex)";
+        if (!empty($size))
+            $query .= " AND Size IN ($size)";
+        $stmt = $this->pdo->query($query);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     
 
     function __destruct() {
