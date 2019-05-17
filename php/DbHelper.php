@@ -146,6 +146,7 @@ class DbHelper {
         $brands = $data['brand'];
         $sex = $data['sex'];
         $size = $data['size'];
+        $type = $data['type'];
 
         $query = "SELECT * FROM $this->table_products WHERE Cost BETWEEN $min_price AND $max_price";
         if (!empty($brands))
@@ -154,6 +155,8 @@ class DbHelper {
             $query .= " AND Sex IN ($sex)";
         if (!empty($size))
             $query .= " AND Size IN ($size)";
+        if (!empty($type))
+            $query .= " AND `Type` IN ($type)";
         $stmt = $this->pdo->query($query);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

@@ -511,7 +511,7 @@ input[type="checkbox"]:checked + .l_checkbox::before{
 	color: #3e6105;
 }
 
-#product-to-basket-btn {
+.product-to-basket-btn {
 	font-size: 12px;
 	font-family: 'Helvetica';
 	width: 120px;
@@ -537,7 +537,7 @@ input[type="checkbox"]:checked + .l_checkbox::before{
  	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#a67939, endColorstr=#845108);
 }
 
-#product-to-basket-btn:hover{
+.product-to-basket-btn:hover{
 	border-color:#3A4C7D;
 	border-width: 0px 0px 2px 0px;
 	border-style: solid;
@@ -551,7 +551,7 @@ input[type="checkbox"]:checked + .l_checkbox::before{
 	background-image: linear-gradient(to bottom, #3e6105, #543305);
 	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#3e6105, endColorstr=#543305);
 }
-#product-to-basket-btn:focus {
+.product-to-basket-btn:focus {
    	outline: none;
    	color: #c5ffaa;
 	background-color: #3e6105;
@@ -746,4 +746,43 @@ input[type="checkbox"]:checked + .l-checkbox-size::before {
 	border-top:0;
 	border-bottom-right-radius: 6px;
 	border-bottom-left-radius: 6px;
+}
+
+.basket-div {
+	height: 3.5em;
+	margin-right: auto;
+	margin-left: auto;
+	
+}
+
+.basket-image {
+	display: block;
+	height: 3em;
+	width: 3em;
+	background-size: cover;
+    background-position: center;
+	background-image: url(../resource/icon/basket-icon.png);
+}
+
+.basket-image-div {
+	display: flex;
+	justify-content: space-around;
+	background: rgb(255, 220, 124);
+	border-bottom: 3px solid #a67939;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-left: 3px solid #a67939;
+	border-right: 3px solid #a67939;
+	float: right;
+	height: 3em;
+	width: 6.5em;
+	margin-right: 1.7em;
+}
+
+.count-basket {
+	font-size: 2em;
+	font-family: Helvetica, sans-serif;
+	margin-top: auto;
+	margin-bottom: auto;
+	color: #754d15;
 }

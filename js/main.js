@@ -14,7 +14,9 @@ $(document).ready(function(){
 
     check_session();
     product_place();
+    basket_count();
     slider();
+    let type = "";
     let modalSignUp = document.getElementById('modalSignup');
     let btnSignUp = document.getElementById('signUpBtn');
     let form_signup = document.getElementById('errors-signup');
@@ -91,6 +93,20 @@ $(document).ready(function(){
         });
     }
 
+    function basket_count() {
+        let data = {'action' : 'get_count_basket'};
+        $.ajax({
+            type: "POST",
+            url: "php/main.php",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function(msg) {
+                $(".count-basket").html('');
+                $(".count-basket").append(msg);
+            }
+        });
+    }
+
     function product_view(msg) {
         console.log(msg);
         $("#product-place").html('');
@@ -104,7 +120,7 @@ $(document).ready(function(){
                         <div id="product-text">\
                             <div id="product-name">' + col['Name'] +'</div>\
                             <div id="product-cost">' + col['Cost'] + ' $' + '</div>\
-                            <button id="product-to-basket-btn" value="">ADD TO CART</button>\
+                            <button class="product-to-basket-btn" value="' + col['ID'] + '">ADD TO CART</button>\
                         </div>\
                     </div>');
             });
@@ -118,10 +134,24 @@ $(document).ready(function(){
                 <div id="product-text">\
                     <div id="product-name">' + msg['Name'] +'</div>\
                     <div id="product-cost">' + msg['Cost'] + '$' + '</div>\
-                    <button id="product-to-basket-btn" value="">ADD TO CART</button>\
+                    <button class="product-to-basket-btn"  value="' + msg['ID'] + '">ADD TO CART</button>\
                 </div>\
             </div>');
         }
+        $(".product-to-basket-btn").click(function(){
+            $(this).blur();
+            let data = {'action' : 'add_to_cart', 'id' : $(this).attr('value')};
+            $.ajax({
+                type: "POST",
+                url: "php/main.php",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function(msg) {
+                    console.log(msg);
+                    basket_count();
+                }
+            });
+        });
     }
 
     $("#modalSignup").mouseup(function (e) {
@@ -237,6 +267,7 @@ $(document).ready(function(){
                     size = size + ",'" + obj.value + "'";
             }
         });
+        data['type'] = type;
         data['min_price'] = $("#result-start").text();
         data['max_price'] = $("#result-end").text();
         data['size'] = size;
@@ -292,7 +323,21 @@ $(document).ready(function(){
         });
     });
 
-    
+    $(".running").click(function(event){
+        event.preventDefault();
+        type = "'Running'";
+        $("#filter-form").submit();
+    });
+    $(".training").click(function(event){
+        event.preventDefault();
+        type = "'Training'";
+        $("#filter-form").submit();
+    });
+    $(".lifestyle").click(function(event){
+        event.preventDefault();
+        type = "'Lifestyle'";
+        $("#filter-form").submit();
+    });
 });
 
 

@@ -84,6 +84,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 exit;
             case 'filter':
                 echo json_encode($dbh->selectFilter($data));
+                exit;
+            case 'add_to_cart':
+                if (!isset($_SESSION['cart'])){
+                    $_SESSION['cart'] = array($data['id']);
+                    $_SESSION['cart_count'] = count($_SESSION['cart']);
+                }
+                else {
+                    $_SESSION['cart'][] = $data['id'];
+                    $_SESSION['cart_count'] = count($_SESSION['cart']);
+                }
+                echo $_SESSION['cart_count'];
+                unset($_SESSION['cart']);
+                unset($_SESSION['cart_count']);
+                exit;
+            case 'get_count_basket':
+                if (isset($_SESSION['cart_count']))
+                    echo $_SESSION['cart_count'];
+                else
+                    echo '0';
+                exit;
         }
         // echo json_encode(array('foo' => 'bar'));
         //echo json_encode($errs);

@@ -202,6 +202,12 @@
 			</div>
 			</form>
 		</aside>
+		<div class="basket-div">
+			<div class="basket-image-div">
+				<div class="count-basket"></div>
+				<div class="basket-image"></div>
+			</div>
+		</div>
 		<div id="product-place">
 			<!-- <div id="product">
 				<div id="product-img">
