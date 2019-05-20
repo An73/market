@@ -9,6 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($_SERVER["CONTENT_TYPE"] == 'application/json'){
         $data = json_decode( file_get_contents('php://input'), true);
         $errs = array();
+        call_method($data['object'], $data['method'], $data['params'], $dbh);
+        exit;
         switch ($data['action']) {
             case "signup":
                 $errs = validate_form($data);
@@ -113,16 +115,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-function validate_form($data) {
-    $errors = array();
-    if (strlen($data['newLogin']) < 3) {
-        $errors[] = 'Your login must be at least 3 letters long.';
-    }
-    if ($data['passwd1'] != $data['passwd2']) {
-        $errors[] = 'Please check that you have entered or correctly entered your password!';
-    }
-    return $errors;
+function call_method($object_name, $method_name, $params, $dbh) {
+    include_once $object_name . '.php';
+    $object = new $object_name($dbh);
+    echo json_encode($object->$method_name($params));
 }
+
+// function validate_form($data) {
+//     $errors = array();
+//     if (strlen($data['newLogin']) < 3) {
+//         $errors[] = 'Your login must be at least 3 letters long.';
+//     }
+//     if ($data['passwd1'] != $data['passwd2']) {
+//         $errors[] = 'Please check that you have entered or correctly entered your password!';
+//     }
+//     return $errors;
+// }
 
 function signUpForm() {
     header('Content-Type: application/json');

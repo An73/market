@@ -12,6 +12,18 @@ $(document).ready(function(){
     //     }
     // });
 
+    // $.ajax({
+    //     type:"POST",
+    //     url: "php/main.php",
+    //     contentType: "application/json",
+    //     data: JSON.stringify({'action': 'test', 'object': 'API', 'method_name': 'raz_raz', 'params': 'Xuy'}),
+    //     success: function(msg) {
+    //         // msg = JSON.parse(msg);
+    //         console.log(msg);
+    //     }
+    // });
+
+
     check_session();
     product_place();
     basket_count();
@@ -58,25 +70,45 @@ $(document).ready(function(){
     }
 
     function check_session() {
-        $.ajax({
-            type:"POST",
-            url: "php/main.php",
-            contentType: "application/json",
-            data: JSON.stringify({'action':'check_session'}),
-            success: function(msg) {
-                msg = JSON.parse(msg);
-                console.log(msg);
-                if (msg['User'] == 'none') {
-                    $("#sign-in-div3").css("display", "none");
-                    $(".form-div3").css("display", "flex");
-                }
-                else {
-                    $(".form-div3").css("display", "none");
-                    $("#sign-in-div3").css("display", "flex");
-                    $("#header-user").html("Hello, " + msg['User']);
-                }
+        let data = {};
+        data['object'] = 'UserControl';
+        data['method'] = 'checkSession';
+        data['params'] = "";
+        data = JSON.stringify(data);
+        promise = ajaxPattern(data);
+        promise.done(function(msg) {
+            msg = JSON.parse(msg)
+            if (msg['User'] == 'none') {
+                $("#sign-in-div3").css("display", "none");
+                $(".form-div3").css("display", "flex");
+            }
+            else {
+                $(".form-div3").css("display", "none");
+                $("#sign-in-div3").css("display", "flex");
+                $("#header-user").html("Hello, " + msg['User']);
             }
         });
+
+
+        // $.ajax({
+        //     type:"POST",
+        //     url: "php/main.php",
+        //     contentType: "application/json",
+        //     data: JSON.stringify({'action':'check_session'}),
+        //     success: function(msg) {
+        //         msg = JSON.parse(msg);
+        //         console.log(msg);
+        //         if (msg['User'] == 'none') {
+        //             $("#sign-in-div3").css("display", "none");
+        //             $(".form-div3").css("display", "flex");
+        //         }
+        //         else {
+        //             $(".form-div3").css("display", "none");
+        //             $("#sign-in-div3").css("display", "flex");
+        //             $("#header-user").html("Hello, " + msg['User']);
+        //         }
+        //     }
+        // });
     }
 
     function product_place() {
@@ -170,73 +202,69 @@ $(document).ready(function(){
 
         let this_form = $(this).serializeArray();
         let data = {};
+        let params = {};
         $(this_form).each(function(index, obj){
-            data[obj.name] = obj.value;
+            params[obj.name] = obj.value;
         });
-        data['action'] = 'signin';
+        data['object'] = 'UserControl';
+        data['method'] = 'signIn';
+        data['params'] = params;
         data = JSON.stringify(data);
-        $.ajax({
-            type:"POST",
-            url: "php/main.php",
-            contentType: "application/json",
-            data: data,
-            success: function(msg) {
-                console.log(msg);
-                if (msg == '1') {
-                    check_session();
-                }
-                else {
-                    $("#modalSignup").css('display', 'block');
-                    $("#error-signin").css('display', 'block');
-                    $(".modal-content").css('display', 'none');
-                }
-
+        msg = ajaxPattern(data);
+        if (msg) {
+            if (msg == '1') {
+                check_session();
             }
-        });
+            else {
+                $("#modalSignup").css('display', 'block');
+                $("#error-signin").css('display', 'block');
+                $(".modal-content").css('display', 'none');
+            }
+        }
+        // $.ajax({
+        //     type:"POST",
+        //     url: "php/main.php",
+        //     contentType: "application/json",
+        //     data: data,
+        //     success: function(msg) {
+        //         console.log(msg);
+        //         if (msg == '1') {
+        //             check_session();
+        //         }
+        //         else {
+        //             $("#modalSignup").css('display', 'block');
+        //             $("#error-signin").css('display', 'block');
+        //             $(".modal-content").css('display', 'none');
+        //         }
+
+        //     }
+        // });
     });
 
     $("#form-signUp-id").submit(function(event){
+        event.preventDefault();
         $(".submit-signUp-modal").blur();
         let this_form = $(this).serializeArray();
         let data = {};
+        let params = {};
         $(this_form).each(function(index, obj){
-            data[obj.name] = obj.value;
+            params[obj.name] = obj.value;
         });
-        data['action'] = "signup";
-        console.log(data);
-
+        data['object'] = 'UserControl'
+        data['method'] = 'signUp';
+        data['params'] = params;
         data = JSON.stringify(data);
-        console.log(data);
-
-        event.preventDefault();
-        $.ajax({
-            type:"POST",
-            url: "php/main.php",
-            contentType: "application/json",
-            data: data,
-            success: function(msg) {
-                console.log(msg);
-                msg = JSON.parse(msg);
-                if ('errors' in msg) {
-                    $('#errors-signup').empty();
-                    $('#errors-signup').append(msg.errors);
-                }
-                else {
-                    $(".modal-content").css('display', 'none');
-                    $("#success-signup").css('display', 'block');
-                }
-                
-
-                console.log(msg);
-                // $('#signup_form_container').html(msg);
-            },
-            failure: function(errMsg) {
-                alert(errMsg);
-            },
-            error: function(xml, error) {
-                console.log(error);
-              }
-        });
+        msg = ajaxPattern(data);
+        if (msg) {
+            if ('errors' in msg) {
+                $('#errors-signup').empty();
+                $('#errors-signup').append(msg.errors);
+            }
+            else {
+                $(".modal-content").css('display', 'none');
+                $("#success-signup").css('display', 'block');
+            }
+        }
     });
 
     $("#filter-form").submit(function(event){
@@ -293,17 +321,24 @@ $(document).ready(function(){
 
     $("#logout-btn-header").click(function() {
         
-        let data = {'action':'logout'};
+        let data = {};
+        data['object'] = 'UserControl'
+        data['method'] = 'logOut';
+        data['params'] = ""
         data = JSON.stringify(data);
-        $.ajax({
-            type:"POST",
-            url: "php/main.php",
-            contentType: "application/json",
-            data: data,
-            success: function() {
-                check_session();
-            } 
+        promise = ajaxPattern(data);
+        promise.done(function(){
+            check_session();
         });
+        // $.ajax({
+        //     type:"POST",
+        //     url: "php/main.php",
+        //     contentType: "application/json",
+        //     data: data,
+        //     success: function() {
+        //         check_session();
+        //     } 
+        // });
     });
 
     $("#personal-cabinet").click(function() {
@@ -340,6 +375,24 @@ $(document).ready(function(){
     });
 });
 
+function ajaxPattern(data) {
+    return $.ajax({
+        type:"POST",
+        url: "php/main.php",
+        contentType: "application/json",
+        data: data
+        // success: function(msg) {
+        //     console.log(msg);
+        //     JSON.parse(msg);
+        // },
+        // failure: function(errMsg) {
+        //     alert(errMsg);
+        // },
+        // error: function(xml, error) {
+        //     console.log(error);
+        //   }
+    });
+}
 
     // $(".form-signUp-modal").ajaxForm({
     //     type:"POST",
