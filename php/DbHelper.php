@@ -160,6 +160,15 @@ class DbHelper {
         $stmt = $this->pdo->query($query);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    function getProductsByArray(array $arr) {
+        if (!empty($arr)) {
+            $stmt = $this->pdo->query("SELECT * FROM $this->table_products 
+                                        WHERE ID IN (" . implode(',', $arr). ")");
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return null;
+    }
     
 
     function __destruct() {

@@ -7,7 +7,6 @@ class UserControl {
         $this->dbh = $dbh;
     }
     
-    
     function signUp($data) {
         $errs = $this->validate_form($data);
         if (!empty($errs))
@@ -37,9 +36,26 @@ class UserControl {
     function logOut() {
         unset($_SESSION['User']);
     }
-    
-    
-    
+
+    function checkAdmin() {
+        if (isset($_SESSION['User'])) {
+            $ret = $this->dbh->isAdmin($_SESSION['User']);
+            return $ret['User_admin'];
+        }
+        return '0';
+    }
+
+    function updateAdmin($data){
+        return $this->dbh->updateAdminUser($data['id'], $data['admin']);
+    }
+
+    function userPlace() {
+        return $this->dbh->getUsers();
+    }
+
+    function deleteUser($data) {
+        return $this->dbh->deleteUser($data['id']);
+    }
     
     private function validate_form($data) {
         $errors = array();

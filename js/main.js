@@ -2,27 +2,6 @@
 
 $(document).ready(function(){
 
-    // $("#filter-slider").slider({
-    //     animate: "slow",
-    //     range: true,
-    //     values: [0, 150],
-    //     slide: function(event, ui) {
-    //         $("#result-start").text(ui.values[0]);
-    //         $("#result-end").text(ui.values[1]);
-    //     }
-    // });
-
-    // $.ajax({
-    //     type:"POST",
-    //     url: "php/main.php",
-    //     contentType: "application/json",
-    //     data: JSON.stringify({'action': 'test', 'object': 'API', 'method_name': 'raz_raz', 'params': 'Xuy'}),
-    //     success: function(msg) {
-    //         // msg = JSON.parse(msg);
-    //         console.log(msg);
-    //     }
-    // });
-
 
     check_session();
     product_place();
@@ -39,43 +18,31 @@ $(document).ready(function(){
     }
 
     function slider() {
-        $.ajax({
-            type:"POST",
-            url: "php/main.php",
-            contentType: "application/json",
-            data: JSON.stringify({'action': 'range_price'}),
-            success: function(msg) {
-                msg = JSON.parse(msg);
-                msg['min_price'] = parseInt(msg['min_price'], 10);
-                msg['max_price'] = parseInt(msg['max_price'], 10);
+        let promise = getPromise('ProductControl', 'rangePrice', '');
+        promise.done(function(msg){
+            msg = JSON.parse(msg);
+            msg['min_price'] = parseInt(msg['min_price'], 10);
+            msg['max_price'] = parseInt(msg['max_price'], 10);
 
-                console.log(msg);
+            $("#result-start").text(msg['min_price']);
+            $("#result-end").text(msg['max_price']);
 
-                $("#result-start").text(msg['min_price']);
-                $("#result-end").text(msg['max_price']);
-
-                $("#filter-slider").slider({
-                    animate: "fast",
-                    min: msg['min_price'],
-                    max: msg['max_price'],
-                    range: true,
-                    values: [msg['min_price'], msg['max_price']],
-                    slide: function(event, ui) {
-                        $("#result-start").text(ui.values[0]);
-                        $("#result-end").text(ui.values[1]);
-                    }
-                });
-            }
+            $("#filter-slider").slider({
+                animate: "fast",
+                min: msg['min_price'],
+                max: msg['max_price'],
+                range: true,
+                values: [msg['min_price'], msg['max_price']],
+                slide: function(event, ui) {
+                    $("#result-start").text(ui.values[0]);
+                    $("#result-end").text(ui.values[1]);
+                }
+            });
         })
     }
 
     function check_session() {
-        let data = {};
-        data['object'] = 'UserControl';
-        data['method'] = 'checkSession';
-        data['params'] = "";
-        data = JSON.stringify(data);
-        promise = ajaxPattern(data);
+        let promise = getPromise('UserControl', 'checkSession', '');
         promise.done(function(msg) {
             msg = JSON.parse(msg)
             if (msg['User'] == 'none') {
@@ -88,55 +55,36 @@ $(document).ready(function(){
                 $("#header-user").html("Hello, " + msg['User']);
             }
         });
-
-
-        // $.ajax({
-        //     type:"POST",
-        //     url: "php/main.php",
-        //     contentType: "application/json",
-        //     data: JSON.stringify({'action':'check_session'}),
-        //     success: function(msg) {
-        //         msg = JSON.parse(msg);
-        //         console.log(msg);
-        //         if (msg['User'] == 'none') {
-        //             $("#sign-in-div3").css("display", "none");
-        //             $(".form-div3").css("display", "flex");
-        //         }
-        //         else {
-        //             $(".form-div3").css("display", "none");
-        //             $("#sign-in-div3").css("display", "flex");
-        //             $("#header-user").html("Hello, " + msg['User']);
-        //         }
-        //     }
-        // });
     }
 
     function product_place() {
-        let filter = {'action':'product_place'}
-        $.ajax({
-            type: "POST",
-            url: "php/main.php",
-            contentType: "application/json",
-            data: JSON.stringify(filter),
-            success: function(msg) {
-                msg = JSON.parse(msg);
-                product_view(msg);
-            }
+        let promise = getPromise('ProductControl', 'productPlace', '');
+        promise.done(function(msg){
+            msg = JSON.parse(msg);
+            product_view(msg);
         });
     }
 
     function basket_count() {
-        let data = {'action' : 'get_count_basket'};
-        $.ajax({
-            type: "POST",
-            url: "php/main.php",
-            contentType: "application/json",
-            data: JSON.stringify(data),
-            success: function(msg) {
-                $(".count-basket").html('');
-                $(".count-basket").append(msg);
-            }
+        let promise = getPromise('ProductControl', 'basketCount', '');
+        promise.done(function(msg){
+            $(".count-basket").html('');
+            $(".count-basket").append(msg);
         });
+    }
+
+    function patternProduct(Link_image, Name, Cost, ID) {
+        $("#product-place").append(
+            '<div id="product">\
+                <div id="product-img">\
+                    <img src="' + Link_image +'">\
+                </div>\
+                <div id="product-text">\
+                    <div id="product-name">' + Name +'</div>\
+                    <div id="product-cost">' + Cost + ' $' + '</div>\
+                    <button class="product-to-basket-btn" value="' + ID + '">ADD TO CART</button>\
+                </div>\
+            </div>');
     }
 
     function product_view(msg) {
@@ -144,44 +92,18 @@ $(document).ready(function(){
         $("#product-place").html('');
         if (Array.isArray(msg)){
             msg.forEach(col => {
-                $("#product-place").append(
-                    '<div id="product">\
-                        <div id="product-img">\
-                            <img src="' + col['Link_image'] +'">\
-                        </div>\
-                        <div id="product-text">\
-                            <div id="product-name">' + col['Name'] +'</div>\
-                            <div id="product-cost">' + col['Cost'] + ' $' + '</div>\
-                            <button class="product-to-basket-btn" value="' + col['ID'] + '">ADD TO CART</button>\
-                        </div>\
-                    </div>');
+                patternProduct(col['Link_image'], col['Name'], col['Cost'], col['ID']);
             });
         }
-        else {
-            $("#product-place").append(
-            '<div id="product">\
-                <div id="product-img">\
-                    <img src="' + msg['Link_image'] +'">\
-                </div>\
-                <div id="product-text">\
-                    <div id="product-name">' + msg['Name'] +'</div>\
-                    <div id="product-cost">' + msg['Cost'] + '$' + '</div>\
-                    <button class="product-to-basket-btn"  value="' + msg['ID'] + '">ADD TO CART</button>\
-                </div>\
-            </div>');
-        }
+        else
+            patternProduct(msg['Link_image'], msg['Name'], msg['Cost'], msg['ID']);
+        
         $(".product-to-basket-btn").click(function(){
             $(this).blur();
-            let data = {'action' : 'add_to_cart', 'id' : $(this).attr('value')};
-            $.ajax({
-                type: "POST",
-                url: "php/main.php",
-                contentType: "application/json",
-                data: JSON.stringify(data),
-                success: function(msg) {
-                    console.log(msg);
-                    basket_count();
-                }
+            let data = {'id' : $(this).attr('value')};
+            let promise = getPromise('ProductControl', 'addToCart', data);
+            promise.done(function(msg){
+                basket_count();
             });
         });
     }
@@ -201,18 +123,15 @@ $(document).ready(function(){
         event.preventDefault();
 
         let this_form = $(this).serializeArray();
-        let data = {};
         let params = {};
         $(this_form).each(function(index, obj){
             params[obj.name] = obj.value;
         });
-        data['object'] = 'UserControl';
-        data['method'] = 'signIn';
-        data['params'] = params;
-        data = JSON.stringify(data);
-        msg = ajaxPattern(data);
-        if (msg) {
-            if (msg == '1') {
+
+        let promise = getPromise('UserControl', 'signIn', params);
+        promise.done(function(msg){
+            msg = JSON.parse(msg);
+            if (msg == "1") {
                 check_session();
             }
             else {
@@ -220,25 +139,11 @@ $(document).ready(function(){
                 $("#error-signin").css('display', 'block');
                 $(".modal-content").css('display', 'none');
             }
-        }
-        // $.ajax({
-        //     type:"POST",
-        //     url: "php/main.php",
-        //     contentType: "application/json",
-        //     data: data,
-        //     success: function(msg) {
-        //         console.log(msg);
-        //         if (msg == '1') {
-        //             check_session();
-        //         }
-        //         else {
-        //             $("#modalSignup").css('display', 'block');
-        //             $("#error-signin").css('display', 'block');
-        //             $(".modal-content").css('display', 'none');
-        //         }
+        });
+    });
 
-        //     }
-        // });
+    $(".basket-div").click(function() {
+        $(location).attr('href', 'cart.html');
     });
 
     $("#form-signUp-id").submit(function(event){
@@ -250,12 +155,9 @@ $(document).ready(function(){
         $(this_form).each(function(index, obj){
             params[obj.name] = obj.value;
         });
-        data['object'] = 'UserControl'
-        data['method'] = 'signUp';
-        data['params'] = params;
-        data = JSON.stringify(data);
-        msg = ajaxPattern(data);
-        if (msg) {
+
+        let promise = getPromise('UserControl', 'signUp', params);
+        promise.done(function(msg){
             if ('errors' in msg) {
                 $('#errors-signup').empty();
                 $('#errors-signup').append(msg.errors);
@@ -264,7 +166,7 @@ $(document).ready(function(){
                 $(".modal-content").css('display', 'none');
                 $("#success-signup").css('display', 'block');
             }
-        }
+        });
     });
 
     $("#filter-form").submit(function(event){
@@ -303,57 +205,27 @@ $(document).ready(function(){
         data['sex'] = sex;
         data['price_min'] = $("#result-start").text();
         data['price_max'] = $("#result-end").text();
-        data['action'] = "filter";
-        console.log(data);
-        data = JSON.stringify(data);
-        $.ajax({
-            type: "POST",
-            url: "php/main.php",
-            contentType: "application/json",
-            data: data,
-            success: function(msg) {
-                console.log(msg);
-                msg = JSON.parse(msg);
-                product_view(msg);
-            }
-        })
+
+        let promise = getPromise('ProductControl', 'filter', data);
+        promise.done(function(msg){
+            msg = JSON.parse(msg);
+            product_view(msg);
+        });
     });
 
     $("#logout-btn-header").click(function() {
-        
-        let data = {};
-        data['object'] = 'UserControl'
-        data['method'] = 'logOut';
-        data['params'] = ""
-        data = JSON.stringify(data);
-        promise = ajaxPattern(data);
+        let promise = getPromise('UserControl', 'logOut', '');
         promise.done(function(){
             check_session();
         });
-        // $.ajax({
-        //     type:"POST",
-        //     url: "php/main.php",
-        //     contentType: "application/json",
-        //     data: data,
-        //     success: function() {
-        //         check_session();
-        //     } 
-        // });
     });
 
     $("#personal-cabinet").click(function() {
-        let data = {'action' : 'check_admin'};
-        data = JSON.stringify(data);
-        $.ajax({
-            type:"POST",
-            url: "php/main.php",
-            contentType: "application/json",
-            data: data,
-            success: function(msg) {
-                if (msg == '1') {
-                    $(location).attr('href', 'admin.html')
-                }
-                console.log(msg);
+        let promise = getPromise('UserControl', 'checkAdmin', '');
+        promise.done(function(msg) {
+            msg = JSON.parse(msg);
+            if (msg == '1') {
+                $(location).attr('href', 'admin.html')
             }
         });
     });
@@ -375,30 +247,22 @@ $(document).ready(function(){
     });
 });
 
+function getPromise(object, method, params) {
+    let data = {};
+    let promise;
+    data['object'] = object;
+    data['method'] = method;
+    data['params'] = params;
+    data = JSON.stringify(data);
+    promise = ajaxPattern(data);
+    return promise; 
+}
+
 function ajaxPattern(data) {
     return $.ajax({
         type:"POST",
         url: "php/main.php",
         contentType: "application/json",
         data: data
-        // success: function(msg) {
-        //     console.log(msg);
-        //     JSON.parse(msg);
-        // },
-        // failure: function(errMsg) {
-        //     alert(errMsg);
-        // },
-        // error: function(xml, error) {
-        //     console.log(error);
-        //   }
     });
 }
-
-    // $(".form-signUp-modal").ajaxForm({
-    //     type:"POST",
-    //     url: "php/main.php",
-    //     success: function(msg) {
-    //         alert(msg);
-    //         $('#signup_form_container').html(msg);
-    //     }
-    // });
